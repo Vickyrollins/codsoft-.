@@ -1,36 +1,22 @@
 import random
-def play_game():
-    user_score = 0
-    computer_score = 0
-    print("Welcome to Rock, Paper, Scissors!")
-    print("Instructions: Type 'rock', 'paper', or 'scissors' to make a choice. Type 'quit' to exit the game.\n")
-
-    while True:
-        user_choice = input("Choose rock, paper, or scissors: ").lower()
-        if user_choice == "quit":
-            print("Thanks for playing!")
-            break
-        if user_choice not in ["rock", "paper", "scissors"]:
-            print("Invalid choice. Please try again.\n")
-            continue
-        computer_choice = random.choice(["rock", "paper", "scissors"])
-        print(f"Computer chose: {computer_choice}")
-        if user_choice == computer_choice:
-            print("It's a tie!\n")
-        elif (user_choice == "rock" and computer_choice == "scissors") or \
-             (user_choice == "scissors" and computer_choice == "paper") or \
-             (user_choice == "paper" and computer_choice == "rock"):
-            print("You win this round!\n")
-            user_score += 1
-        else:
-            print("Computer wins this round!\n")
-            computer_score += 1
-        print(f"Score: You {user_score} - {computer_score} Computer\n")
-        play_again = input("Do you want to play another round? (yes/no): ").lower()
-        if play_again != "yes":
-            print("Thanks for playing!")
-            print(f"Final Score: You {user_score} - {computer_score} Computer")
-            break
-
-# Run the game
-play_game()
+import string
+def generate_password(length=12, use_uppercase=True, use_numbers=True, use_special=True):
+    if length < 1:
+        raise ValueError("Password length must be at least 1.")
+    characters = string.ascii_lowercase
+    if use_uppercase:
+        characters += string.ascii_uppercase
+    if use_numbers:
+        characters += string.digits
+    if use_special:
+        characters += string.punctuation
+    if not characters:
+        raise ValueError("No characters available to generate the password.")
+    return ''.join(random.choice(characters) for _ in range(length))
+if __name__ == "__main__":
+    length = int(input("Enter the password length: "))
+    use_uppercase = input("Include uppercase letters? (y/n): ").strip().lower() == 'y'
+    use_numbers = input("Include numbers? (y/n): ").strip().lower() == 'y'
+    use_special = input("Include special characters? (y/n): ").strip().lower() == 'y'
+    password = generate_password(length, use_uppercase, use_numbers, use_special)
+    print("Generated password:", password)
