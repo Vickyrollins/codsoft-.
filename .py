@@ -1,30 +1,20 @@
 import random
-
 def play_game():
     user_score = 0
     computer_score = 0
-
     print("Welcome to Rock, Paper, Scissors!")
     print("Instructions: Type 'rock', 'paper', or 'scissors' to make a choice. Type 'quit' to exit the game.\n")
 
     while True:
-        # Prompt user for input
         user_choice = input("Choose rock, paper, or scissors: ").lower()
-        
         if user_choice == "quit":
             print("Thanks for playing!")
             break
-        
         if user_choice not in ["rock", "paper", "scissors"]:
             print("Invalid choice. Please try again.\n")
             continue
-        
-        # Generate computer's choice
         computer_choice = random.choice(["rock", "paper", "scissors"])
-        
         print(f"Computer chose: {computer_choice}")
-
-        # Determine the winner
         if user_choice == computer_choice:
             print("It's a tie!\n")
         elif (user_choice == "rock" and computer_choice == "scissors") or \
@@ -35,11 +25,7 @@ def play_game():
         else:
             print("Computer wins this round!\n")
             computer_score += 1
-
-        # Display current score
         print(f"Score: You {user_score} - {computer_score} Computer\n")
-
-        # Ask if the user wants to play another round
         play_again = input("Do you want to play another round? (yes/no): ").lower()
         if play_again != "yes":
             print("Thanks for playing!")
